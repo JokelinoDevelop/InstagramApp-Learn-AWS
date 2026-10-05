@@ -1,17 +1,21 @@
 {
-  "private": true,
   "name": "@learn_aws_instagram/api",
   "version": "1.0.0",
-  "scripts": {
-    "build": "tsc"
-  },
+  "private": true,
   "license": "ISC",
   "type": "module",
-  "engines": {
-    "node": "26.x"
+  "scripts": {
+    "prebuild": "rm -rf dist",
+    "build": "tsc --noEmit && esbuild src/functions/health.ts --bundle --sourcemap --platform=node --target=node26 --format=esm --outfile=dist/health.mjs",
+    "postbuild": "cd dist && zip health.zip health.mjs health.mjs.map"
   },
   "devDependencies": {
+    "@types/aws-lambda": "^8.10.164",
     "@types/node": "^26.6.4",
+    "esbuild": "^0.28.2",
     "typescript": "catalog:"
+  },
+  "engines": {
+    "node": "26.x"
   }
 }

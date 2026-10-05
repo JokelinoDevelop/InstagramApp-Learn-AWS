@@ -1,13 +1,22 @@
 {
-  "private": true,
   "name": "learn_aws_instagram",
   "version": "1.0.0",
+  "private": true,
   "description": "A project focused on learning the AWS ecosystem by building an Instagram clone.",
-  "scripts": {
-    "build":"pnpm -r run build"
-  },
-  "author": "Jovan Veljanoski <veljanoski.jovan100@gmail.com>",
   "license": "ISC",
+  "author": "Jovan Veljanoski <veljanoski.jovan100@gmail.com>",
+  "scripts": {
+    "build": "pnpm -r run build",
+    "check": "ultracite check",
+    "fix": "ultracite fix"
+  },
+  "devDependencies": {
+    "lefthook": "^2.1.16",
+    "oxfmt": "^0.71.0",
+    "oxlint": "^1.86.0",
+    "typescript": "catalog:",
+    "ultracite": "7.12.2"
+  },
   "devEngines": {
     "packageManager": {
       "name": "pnpm",
@@ -15,11 +24,8 @@
       "onFail": "download"
     }
   },
-  "packageManager": "pnpm@12.9.0",
   "engines": {
     "node": "26.x"
   },
-  "devDependencies": {
-    "typescript": "catalog:"
-  }
+  "packageManager": "pnpm@12.9.0"
 }

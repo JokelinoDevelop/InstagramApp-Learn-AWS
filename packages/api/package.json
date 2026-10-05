@@ -1,0 +1,17 @@
+{
+  "private": true,
+  "name": "@learn_aws_instagram/api",
+  "version": "1.0.0",
+  "scripts": {
+    "build": "tsc"
+  },
+  "license": "ISC",
+  "type": "module",
+  "engines": {
+    "node": "26.x"
+  },
+  "devDependencies": {
+    "@types/node": "^26.6.4",
+    "typescript": "catalog:"
+  }
+}

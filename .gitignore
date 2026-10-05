@@ -1,0 +1,21 @@
+# Dependencies
+node_modules/
+
+# Build output and compiler caches
+dist/
+*.tsbuildinfo
+
+# Local environment configuration (keep shareable templates)
+.env
+.env.*
+!.env.example
+!.env.*.example
+
+# Test output
+coverage/
+
+# Logs
+*.log
+
+# macOS metadata
+.DS_Store

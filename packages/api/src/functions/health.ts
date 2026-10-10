@@ -1,11 +1,28 @@
-// oxlint-disable anti-slop/no-unknown-parameters
-import type { Context } from "aws-lambda";
+import type { APIGatewayProxyEventV2, Context } from "aws-lambda";
 
-export const handler = (_event: unknown, context: Context) => {
-  console.log("Health check event:", _event, "\n");
-  console.log("Health check context:", context);
+const HEALTH_CHECK_STARTED_EVENT = "health_check_started";
+const HEALTH_CHECK_COMPLETED_EVENT = "health_check_completed";
 
-  return {
-    status: "ok",
+export const handler = (event: APIGatewayProxyEventV2, _context: Context) => {
+  console.info({
+    eventName: HEALTH_CHECK_STARTED_EVENT,
+    method: event.requestContext.http.method,
+    path: event.requestContext.http.path,
+  });
+
+  const response = {
+    body: JSON.stringify({
+      status: "ok",
+    }),
+    statusCode: 200,
   };
+
+  console.info({
+    eventName: HEALTH_CHECK_COMPLETED_EVENT,
+    method: event.requestContext.http.method,
+    path: event.requestContext.http.path,
+    statusCode: response.statusCode,
+  });
+
+  return response;
 };

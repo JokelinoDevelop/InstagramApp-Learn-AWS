@@ -99,10 +99,7 @@ export const handler = async (
 
     return {
       body: JSON.stringify({
-        contentType: data.contentType,
-        filename: data.filename,
         imageId,
-        objectKey,
         uploadUrl,
       }),
       statusCode: 200,

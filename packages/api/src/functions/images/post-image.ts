@@ -8,6 +8,8 @@ import { z } from "zod";
 
 import { client } from "../../lib/s3.js";
 
+const IMAGE_URL_GENERATED = "image_upload_url_generated";
+
 const MIME_TYPES = ["image/jpeg", "image/png", "image/webp"] as const;
 
 const postImageBodySchema = z.object({
@@ -83,6 +85,9 @@ export const handler = async (
   const objectKey = buildObjectKey(imageId, data.filename);
 
   try {
+    // expire in 10 minutes (in seconds)
+    const expiresIn = 60 * 10;
+
     const uploadUrl = await getSignedUrl(
       client,
       new PutObjectCommand({
@@ -92,10 +97,17 @@ export const handler = async (
       }),
       {
         // expire in 10 minutes (in seconds)
-        expiresIn: 60 * 10,
+        expiresIn,
         signableHeaders: new Set(["content-type"]),
       }
     );
+
+    console.info({
+      contentType: data.contentType,
+      eventName: IMAGE_URL_GENERATED,
+      expiresIn,
+      imageId,
+    });
 
     return {
       body: JSON.stringify({

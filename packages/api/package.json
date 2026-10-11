@@ -6,10 +6,12 @@
   "type": "module",
   "scripts": {
     "prebuild": "rm -rf dist",
-    "build": "tsc --noEmit && esbuild health=src/functions/health.ts post-image=src/functions/images/post-image.ts --bundle --sourcemap --platform=node --target=node26 --format=esm --outdir=dist --out-extension:.js=.mjs",
+    "build": "tsc --noEmit && esbuild health=src/functions/health.ts post-image=src/functions/images/post-image.ts --bundle --sourcemap --platform=node --target=node26 --format=esm --main-fields=module,main --outdir=dist --out-extension:.js=.mjs",
     "postbuild": "cd dist && zip health.zip health.mjs health.mjs.map && zip post-image.zip post-image.mjs post-image.mjs.map"
   },
   "dependencies": {
+    "@aws-sdk/client-s3": "^3.1149.0",
+    "@aws-sdk/s3-request-presigner": "^3.1149.0",
     "zod": "^4.6.5"
   },
   "devDependencies": {
